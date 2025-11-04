@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Schema;
+
+namespace labubu
+{
+    internal class Phone
+    {
+        private int battery;
+
+        public int BatteryLevel
+        {
+            get { return battery; }
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Заряд не может быть отрицательным.");
+                }
+                else if (value > 100)
+                {
+                    Console.WriteLine("Заряд не должен превышать 100.");
+                }
+                else
+                {
+                    battery = value;
+                }
+            }
+        }
+
+        public string Brand { get; set; }
+
+        public Phone(string brand, int initialCharge)
+        {
+            Brand = brand;
+            BatteryLevel = initialCharge;
+        }
+
+        public void Use()
+        {
+            if (battery >= 10)
+            {
+                battery -= 10;
+            }
+            else
+            {
+                battery = 0;
+                Console.WriteLine($"{Brand}: батарея разряженна!");
+                return;
+            }
+            Console.WriteLine($"{Brand}: заряд {BatteryLevel}%.");
+        }
+    }
+}using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace labubu
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            Phone phone = new Phone("iPhone", 88);
+            phone.Use();
+            phone.Use();
+            phone.Use();
+            phone.BatteryLevel = 150;
+            Console.WriteLine($"{phone.Brand}: заряд {phone.BatteryLevel}%.");
+        }
+    }
+}
