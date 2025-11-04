@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Schema;
+
+namespace labubu
+{
+    internal class Car
+    {
+        private int speed;
+        private string model;
+
+        public int Speed
+        {
+            get { return speed; }
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Скорость не может быть отрицательной.");
+                }
+                else if (value > 300)
+                {
+                    Console.WriteLine("Скорость не должна превышать 300.");
+                }
+                else
+                {
+                    speed = value;
+                }
+            }
+        }
+
+        public string Model { get; set; } = "Unkown";
+
+        public Car(string model, int speed)
+        {
+            Model = model;
+            Speed = speed;
+        }
+
+        public void Drive()
+        {
+            Console.WriteLine($"{Model} едет со скоростью {Speed} км/ч");
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace labubu
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            Car car = new Car("Porche", 290);
+            car.Drive();
+            car.Speed = 400;
+            car.Drive();
+            car.Speed = -100;
+            car.Drive();
+        }
+    }
+}
