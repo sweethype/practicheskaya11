@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace labubuuuu
+{
+    public class Book
+    {
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Название не может быть пустым!");
+                }
+                title = value;
+            }
+        }
+        public int Pages { get; set; } = 1;
+        public bool IsLong => Pages > 300;
+        public Book(string title)
+        {
+            Title = title;
+        }
+        public void Info()
+        {
+            Console.WriteLine($"Книга: {Title}, страниц: {Pages}, длинная: {(IsLong ? "да" : "нет")}");
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace labubuuuu
+
+{
+    class Program
+    {
+        static void Main()
+        {
+            try
+            {
+                Book book1 = new Book("Война и мир");
+                book1.Pages = 1200;
+                book1.Info();
+                Book book2 = new Book("Краткая история");
+                book2.Info();
+                Book book3 = new Book("");
+                book3.Info();
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+    }
+}
